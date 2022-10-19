@@ -12,6 +12,14 @@
             width: 100%;
         }
         
+        #time {
+            width: 100%;
+        }
+        
+        #time p {
+            margin: 0;
+        }
+        
         #left p,
         #header_left p {
             margin: 0;
@@ -29,7 +37,7 @@
         .outer {
             display: flex;
             margin-bottom: 20px;
-            width: 1000px;
+            width: 1500px;
         }
     </style>
 </head>
@@ -48,6 +56,7 @@
     <div class="outer">
         <div id="left"></div>
         <div id="right"></div>
+        <div id="time"></div>
     </div>
 </body>
 
@@ -70,6 +79,10 @@
         r.style.width = `${data.RH}%`
         r.innerText = data.RH.toPrecision(3)
         document.getElementById('right').prepend(r);
+
+        const s = document.createElement("p");
+        s.innerText = new Date().toLocaleString()
+        document.getElementById('time').prepend(s)
     }
 
     const button = document.getElementById('manual-update');
