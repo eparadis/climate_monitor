@@ -1,18 +1,18 @@
-### A climate monitor for my greenhouse
+# A climate monitor for my greenhouse
 
-# Hardware
+## Hardware
 - ESP8266 based board (in my case, the Nodelink D1, based on the ESP12)
  - [Nodeline D1 schematic](https://s3.amazonaws.com/linksprite/Linknode+D1/LinkNode-D1-sch.pdf)
 - Temp/RH sensors like the DHT22
 
-# Software
+## Software
 - micropython 1.19.1 (at time of writing)
  - built-in sensor support for [DHT](https://docs.micropython.org/en/latest/esp8266/quickref.html#dht-driver)
 - (TBD) a micropython webserver like [nanoweb](https://github.com/hugokernel/micropython-nanoweb)
 
 
 
-### NOTES
+# NOTES
 
 Just gluing things together in the REPL:
 ```
