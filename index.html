@@ -3,27 +3,82 @@
 
 <head>
     <title>Greenhouse climate</title>
+    <style>
+        #left {
+            width: 100%;
+        }
+        
+        #right {
+            width: 100%;
+        }
+        
+        #left p,
+        #header_left p {
+            margin: 0;
+            color: #ccc;
+            background-color: darkblue;
+        }
+        
+        #right p,
+        #header_right p {
+            margin: 0;
+            color: #444;
+            background-color: orange;
+        }
+        
+        .outer {
+            display: flex;
+            margin-bottom: 20px;
+            width: 1000px;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Greenhouse Climate</h1>
     <button id="manual-update">Update</button>
+    <div class="">
+        <div id="header_left">
+            <p>Temperature</p>
+        </div>
+        <div id="header_right">
+            <p>Relative Humidity</div>
+    </div>
+
+    <div class="outer">
+        <div id="left"></div>
+        <div id="right"></div>
+    </div>
 </body>
 
 <script>
+    const c_to_f = (c) => {
+        return c * 9.0 / 5.0 + 32
+    }
+
     async function getData() {
         const response = await fetch('http://192.168.0.111/data.json', {
             mode: "no-cors"
         });
         const data = await response.json();
-        console.log(`temp ${data.temp} RH ${data.RH}`);
+        const t = document.createElement("p");
+        t.style.width = `${c_to_f(data.temp)}%`
+        t.innerText = c_to_f(data.temp).toPrecision(3)
+        document.getElementById('left').prepend(t);
+
+        const r = document.createElement("p");
+        r.style.width = `${data.RH}%`
+        r.innerText = data.RH.toPrecision(3)
+        document.getElementById('right').prepend(r);
     }
 
     const button = document.getElementById('manual-update');
-
     button.addEventListener('click', (event) => {
         getData();
     });
+
+    getData();
+    setInterval(getData, 60e3);
 </script>
 
 </html>
