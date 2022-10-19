@@ -8,9 +8,8 @@
 ## Software
 - micropython 1.19.1 (at time of writing)
  - built-in sensor support for [DHT](https://docs.micropython.org/en/latest/esp8266/quickref.html#dht-driver)
-- (TBD) a micropython webserver like [nanoweb](https://github.com/hugokernel/micropython-nanoweb)
-
-
+- a micropython webserver like [nanoweb](https://github.com/hugokernel/micropython-nanoweb)
+- [BIPES](http://bipes.net.br/ide/) is a nice IDE for working with web-attached micropython boards like the ESP8266 ones
 
 # NOTES
 
