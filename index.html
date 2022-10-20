@@ -61,18 +61,14 @@
 </body>
 
 <script>
-    const c_to_f = (c) => {
-        return c * 9.0 / 5.0 + 32
-    }
-
     async function getData() {
         const response = await fetch('http://192.168.0.111/data.json', {
             mode: "no-cors"
         });
         const data = await response.json();
         const t = document.createElement("p");
-        t.style.width = `${c_to_f(data.temp)}%`
-        t.innerText = c_to_f(data.temp).toPrecision(3)
+        t.style.width = `${data.temp}%`
+        t.innerText = data.temp.toPrecision(3)
         document.getElementById('left').prepend(t);
 
         const r = document.createElement("p");
