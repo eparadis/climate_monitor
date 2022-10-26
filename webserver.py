@@ -13,7 +13,7 @@ def c_to_f(c):
 
 def light_units(x):
   # percentage for now
-  return 1.0 * x / 1023.0
+  return 100.0 * x / 1023.0
 
 @naw.route("/ping")
 async def ping(request):
