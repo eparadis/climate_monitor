@@ -4,41 +4,7 @@
 <head>
     <title>Greenhouse climate</title>
     <style>
-        #left {
-            width: 100%;
-        }
-        
-        #right {
-            width: 100%;
-        }
-        
-        #time {
-            width: 100%;
-        }
-        
-        #time p {
-            margin: 0;
-        }
-        
-        #left p,
-        #header_left p {
-            margin: 0;
-            color: #ccc;
-            background-color: darkblue;
-        }
-        
-        #right p,
-        #header_right p {
-            margin: 0;
-            color: #444;
-            background-color: orange;
-        }
-        
-        .outer {
-            display: flex;
-            margin-bottom: 20px;
-            width: 1500px;
-        }
+
     </style>
 </head>
 
@@ -46,37 +12,67 @@
     <h1>Greenhouse Climate</h1>
     <button id="manual-update">Update</button>
     <div class="">
-        <div id="header_left">
-            <p>Temperature</p>
-        </div>
-        <div id="header_right">
-            <p>Relative Humidity</div>
-    </div>
+        <svg version="1.1" width="200" height="200" viewbox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
 
-    <div class="outer">
-        <div id="left"></div>
-        <div id="right"></div>
-        <div id="time"></div>
+            <rect x="-50%" y="-50%" width="100%" height="100%" fill="lightgray" />
+          
+            <circle cx="0" cy="0" r="80" fill="darkgray" />
+          
+            <g id="low-temp-arrow-rot">
+              <g transform="translate(0, 80) ">
+                <polygon points="0 0 8 8 -8 8" fill="darkblue" />
+              </g>
+            </g>
+          
+            <g id="high-temp-arrow-rot">
+              <g transform="translate(0, 80) ">
+                <polygon points="8 0 -8 0 0 8" fill="darkred" />
+              </g>
+            </g>
+          
+            <g id="current-temp-arrow-rot">
+              <g transform="translate(0, 70) ">
+                <polygon points="6 0 -6 0 0 20" fill="white" />
+              </g>
+            </g>
+          
+            <g transform="rotate(45, 0, 0) translate(0, 75) ">
+              <rect x="0" y="0" width="5px" height="10px" fill="black" />
+              <text x="-10" y="25" font-size="20" text-anchor="middle" fill="white" transform="rotate(-45)">0</text>
+            </g>
+          
+            <g transform="rotate(-45, 0, 0) translate(0, 75) ">
+              <rect x="0" y="0" width="5px" height="10px" fill="black" />
+              <text x="8" y="25" font-size="20" text-anchor="middle" fill="white" transform="rotate(45)">100</text>
+            </g>
+          
+            <text id="current-temp-label" x="-3%" y="0%" font-size="48" text-anchor="middle" fill="white">58°F</text>
+            <text id="low-temp-label" x="-10%" y="15%" font-size="24" text-anchor="middle" fill="darkblue">45°</text>
+            <text id="high-temp-label" x="+10%" y="15%" font-size="24" text-anchor="middle" fill="darkred">63°</text>
+          
+          </svg>
     </div>
 </body>
 
 <script>
+    const set_arrow_rot = (arrow_name, temp) => {
+        let lower = 45;
+        let upper = -45 + 360;
+
+        let rot = (temp * (upper - lower)) / 100 + lower;
+        document
+            .getElementById(arrow_name + "-arrow-rot")
+            .setAttribute("transform", `rotate(${rot})`);
+
+        const unit = arrow_name == "current-temp" ? '&degF' : '&deg';
+        document.getElementById(arrow_name + "-label").innerHTML = `${temp}${unit}`;
+    };
     async function getData() {
         const response = await fetch('data.json');
         const data = await response.json();
-        const t = document.createElement("p");
-        t.style.width = `${data.temp}%`
-        t.innerText = data.temp.toPrecision(3)
-        document.getElementById('left').prepend(t);
-
-        const r = document.createElement("p");
-        r.style.width = `${data.RH}%`
-        r.innerText = data.RH.toPrecision(3)
-        document.getElementById('right').prepend(r);
-
-        const s = document.createElement("p");
-        s.innerText = new Date().toLocaleString()
-        document.getElementById('time').prepend(s)
+        set_arrow_rot("current-temp", data.temp.toPrecision(2));
+        set_arrow_rot("low-temp", 0);
+        set_arrow_rot("high-temp", 100);
     }
 
     const button = document.getElementById('manual-update');
