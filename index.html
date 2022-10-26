@@ -62,9 +62,7 @@
 
 <script>
     async function getData() {
-        const response = await fetch('http://192.168.0.111/data.json', {
-            mode: "no-cors"
-        });
+        const response = await fetch('data.json');
         const data = await response.json();
         const t = document.createElement("p");
         t.style.width = `${data.temp}%`
