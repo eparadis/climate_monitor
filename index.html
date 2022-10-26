@@ -12,25 +12,68 @@
     <h1>Greenhouse Climate</h1>
     <button id="manual-update">Update</button>
     <div class="">
-        <svg version="1.1" width="200" height="200" viewbox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
+        <div id="temp-gauge">
+
+            <svg version="1.1" width="200" height="200" viewbox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
+
+                <rect x="-50%" y="-50%" width="100%" height="100%" fill="lightgray" />
+              
+                <circle cx="0" cy="0" r="80" fill="darkgray" />
+              
+                <g id="low-arrow-rot">
+                  <g transform="translate(0, 80) ">
+                    <polygon points="0 0 8 8 -8 8" fill="darkblue" />
+                  </g>
+                </g>
+              
+                <g id="high-arrow-rot">
+                  <g transform="translate(0, 80) ">
+                    <polygon points="8 0 -8 0 0 8" fill="darkred" />
+                  </g>
+                </g>
+              
+                <g id="current-arrow-rot">
+                  <g transform="translate(0, 70) ">
+                    <polygon points="6 0 -6 0 0 20" fill="white" />
+                  </g>
+                </g>
+              
+                <g transform="rotate(45, 0, 0) translate(0, 75) ">
+                  <rect x="0" y="0" width="5px" height="10px" fill="black" />
+                  <text x="-10" y="25" font-size="20" text-anchor="middle" fill="white" transform="rotate(-45)">0</text>
+                </g>
+              
+                <g transform="rotate(-45, 0, 0) translate(0, 75) ">
+                  <rect x="0" y="0" width="5px" height="10px" fill="black" />
+                  <text x="8" y="25" font-size="20" text-anchor="middle" fill="white" transform="rotate(45)">100</text>
+                </g>
+              
+                <text id="current-label" x="0%" y="0%" font-size="48" text-anchor="middle" fill="white">58°F</text>
+                <text id="low-label" x="-15%" y="15%" font-size="24" text-anchor="middle" fill="darkblue">45°</text>
+                <text id="high-label" x="+10%" y="15%" font-size="24" text-anchor="middle" fill="darkred">63°</text>
+              
+              </svg>
+        </div>
+        <div id="rh-gauge">
+            <svg version="1.1" width="200" height="200" viewbox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
 
             <rect x="-50%" y="-50%" width="100%" height="100%" fill="lightgray" />
           
             <circle cx="0" cy="0" r="80" fill="darkgray" />
           
-            <g id="low-temp-arrow-rot">
+            <g id="low-arrow-rot">
               <g transform="translate(0, 80) ">
                 <polygon points="0 0 8 8 -8 8" fill="darkblue" />
               </g>
             </g>
           
-            <g id="high-temp-arrow-rot">
+            <g id="high-arrow-rot">
               <g transform="translate(0, 80) ">
                 <polygon points="8 0 -8 0 0 8" fill="darkred" />
               </g>
             </g>
           
-            <g id="current-temp-arrow-rot">
+            <g id="current-arrow-rot">
               <g transform="translate(0, 70) ">
                 <polygon points="6 0 -6 0 0 20" fill="white" />
               </g>
@@ -46,78 +89,36 @@
               <text x="8" y="25" font-size="20" text-anchor="middle" fill="white" transform="rotate(45)">100</text>
             </g>
           
-            <text id="current-temp-label" x="-3%" y="0%" font-size="48" text-anchor="middle" fill="white">58°F</text>
-            <text id="low-temp-label" x="-10%" y="15%" font-size="24" text-anchor="middle" fill="darkblue">45°</text>
-            <text id="high-temp-label" x="+10%" y="15%" font-size="24" text-anchor="middle" fill="darkred">63°</text>
+            <text id="current-label" x="0%" y="0%" font-size="48" text-anchor="middle" fill="white">58°F</text>
+            <text id="low-label" x="-15%" y="15%" font-size="24" text-anchor="middle" fill="darkblue">45°</text>
+            <text id="high-label" x="+10%" y="15%" font-size="24" text-anchor="middle" fill="darkred">63°</text>
           
           </svg>
-
-        <svg version="1.1" width="200" height="200" viewbox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
-
-            <rect x="-50%" y="-50%" width="100%" height="100%" fill="lightgray" />
-          
-            <circle cx="0" cy="0" r="80" fill="darkgray" />
-          
-            <g id="low-rh-arrow-rot">
-              <g transform="translate(0, 80) ">
-                <polygon points="0 0 8 8 -8 8" fill="darkblue" />
-              </g>
-            </g>
-          
-            <g id="high-rh-arrow-rot">
-              <g transform="translate(0, 80) ">
-                <polygon points="8 0 -8 0 0 8" fill="darkred" />
-              </g>
-            </g>
-          
-            <g id="current-rh-arrow-rot">
-              <g transform="translate(0, 70) ">
-                <polygon points="6 0 -6 0 0 20" fill="white" />
-              </g>
-            </g>
-          
-            <g transform="rotate(45, 0, 0) translate(0, 75) ">
-              <rect x="0" y="0" width="5px" height="10px" fill="black" />
-              <text x="-10" y="25" font-size="20" text-anchor="middle" fill="white" transform="rotate(-45)">0</text>
-            </g>
-          
-            <g transform="rotate(-45, 0, 0) translate(0, 75) ">
-              <rect x="0" y="0" width="5px" height="10px" fill="black" />
-              <text x="8" y="25" font-size="20" text-anchor="middle" fill="white" transform="rotate(45)">100</text>
-            </g>
-          
-            <text id="current-rh-label" x="0%" y="0%" font-size="48" text-anchor="middle" fill="white">58°F</text>
-            <text id="low-rh-label" x="-15%" y="15%" font-size="24" text-anchor="middle" fill="darkblue">45°</text>
-            <text id="high-rh-label" x="+10%" y="15%" font-size="24" text-anchor="middle" fill="darkred">63°</text>
-          
-          </svg>
+        </div>
     </div>
 </body>
 
 <script>
-    const set_arrow_rot = (arrow_name, temp) => {
-        let lower = 45;
-        let upper = -45 + 360;
-
-        let rot = (temp * (upper - lower)) / 100 + lower;
+    const set_gauge = (gauge_name, value_name, value) => {
+        const rot = (value * (315 - 45)) / 100 + 45;
         document
-            .getElementById(arrow_name + "-arrow-rot")
-            .setAttribute("transform", `rotate(${rot})`);
-
-        const unit = arrow_name.includes('temp') ?
-            (arrow_name == "current-temp" ? '&degF' : '&deg') :
-            arrow_name == "current-rh" ? '%' : '%'
-        document.getElementById(arrow_name + "-label").innerHTML = `${temp}${unit}`;
-    };
+            .querySelector(`div#${gauge_name}-gauge > svg > g#${value_name}-arrow-rot`)
+            .setAttribute("transform", `rotate(${rot})`)
+        const unit = gauge_name == 'rh' ? '%' :
+            (value_name == 'current' ? '&degF' : '&deg')
+        document
+            .querySelector(`div#${gauge_name}-gauge > svg > text#${value_name}-label`)
+            .innerHTML = `${value}${unit}`
+    }
     async function getData() {
         const response = await fetch('data.json');
         const data = await response.json();
-        set_arrow_rot("current-temp", data.temp.toPrecision(2));
-        set_arrow_rot("low-temp", 0);
-        set_arrow_rot("high-temp", 100);
-        set_arrow_rot("current-rh", data.RH.toPrecision(2));
-        set_arrow_rot("low-rh", 0);
-        set_arrow_rot("high-rh", 100);
+        set_gauge('temp', 'current', data.temp.toPrecision(2));
+        set_gauge('temp', 'low', 0);
+        set_gauge('temp', 'high', 100);
+        set_gauge('rh', 'current', data.RH.toPrecision(2));
+        set_gauge('rh', 'low', 0);
+        set_gauge('rh', 'high', 100);
     }
 
     const button = document.getElementById('manual-update');
