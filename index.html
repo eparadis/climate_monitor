@@ -50,9 +50,9 @@
                   <text x="8" y="25" font-size="20" text-anchor="middle" fill="white" transform="rotate(45)">100</text>
                 </g>
               
-                <text id="current-label" x="0%" y="0%" font-size="48" text-anchor="middle" fill="white">0°F</text>
-                <text id="low-label" x="-15%" y="15%" font-size="24" text-anchor="middle" fill="darkblue">0°</text>
-                <text id="high-label" x="+10%" y="15%" font-size="24" text-anchor="middle" fill="darkred">0°</text>
+                <text id="current-label" x="0%" y="0%" font-size="48" text-anchor="middle" fill="white">0&degF</text>
+                <text id="low-label" x="-15%" y="15%" font-size="24" text-anchor="middle" fill="darkblue">0&deg</text>
+                <text id="high-label" x="+10%" y="15%" font-size="24" text-anchor="middle" fill="darkred">0&deg</text>
               
               </svg>
         </div>
@@ -139,6 +139,7 @@
           </svg>
         </div>
     </div>
+    <div id="vpd-readout"><p>...</p></div>
 </body>
 
 <script>
@@ -161,6 +162,11 @@
             .querySelector(`div#${gauge_name}-gauge > svg > text#${value_name}-label`)
             .innerHTML = `${value}${unit}`
     }
+	const set_readout = (readout_name, value_name, value) => {
+      document
+      	.querySelector(`div#${readout_name}-readout > p`)
+        .innerHTML = `${value_name}: ${value}`
+    }
     async function getData() {
         const response = await fetch('data.json');
         const data = await response.json();
@@ -173,6 +179,7 @@
         set_gauge('light', 'current', data.light.toPrecision(2));
         set_gauge('light', 'low', 0);
         set_gauge('light', 'high', 100);
+        set_readout('vpd', 'vpd (kpa)', data.vpd.toPrecision(2));
     }
 
     const button = document.getElementById('manual-update');
