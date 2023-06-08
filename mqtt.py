@@ -6,6 +6,7 @@ from dht import DHT22
 from machine import Pin, ADC
 from math import log
 from vpd import vpd_kpa
+import gc
 
 sensor = DHT22(Pin(14))
 adc = ADC(0)
@@ -45,4 +46,8 @@ def main():
     c.publish(vpd_tn, str(vpd))
     c.disconnect()
 
+    gc.collect()
+
     time.sleep(60*2)
+
+main()

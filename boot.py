@@ -9,4 +9,7 @@ webrepl.start()
 gc.collect()
 
 # run our webserver by default. use CTRL-C in the webrepl to stop it
-import webserver
+#import webserver
+
+# run our mqtt client by default. use CTRL-C in the webrepl to stop it
+import mqtt
