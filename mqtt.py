@@ -50,4 +50,10 @@ def main():
 
     time.sleep(60*2)
 
-main()
+try:
+  main()
+except Exception as e:
+  print(e)
+  time.sleep(3)
+  machine.reset()
+
