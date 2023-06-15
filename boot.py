@@ -13,3 +13,4 @@ gc.collect()
 
 # run our mqtt client by default. use CTRL-C in the webrepl to stop it
 import mqtt
+mqtt.run()
