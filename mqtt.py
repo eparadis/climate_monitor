@@ -29,6 +29,9 @@ light_tn = b"sensors/greenhouse/light"
 vpd_tn = b"sensors/greenhouse/vapor_pressure_difference"
 
 def main():
+  print('sleeping 5')
+  time.sleep(5)
+
   print('getting client')
   c = MQTTClient(CLIENT_ID, SERVER)
 
@@ -56,7 +59,7 @@ def main():
   c.disconnect()
 
   print('sleeping')
-  time.sleep(60*2)
+  time.sleep(60*2 - 5)
   print('')
 
 def run():
